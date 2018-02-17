@@ -90,6 +90,14 @@ defmodule InfiniteTimes.Ecto.InfDateSpec do
       end
     end
 
+    context "with only date triplet provided" do
+      it "returns the `:finite` InfDate" do
+        {2000, 1, 2}
+        |> InfDate.load()
+        |> should(match_pattern {:ok, %InfiniteTimes.InfDate{finitness: :finite}})
+      end
+    end
+
     context "with invalid input" do
       it "returns an error" do
         nil
