@@ -38,7 +38,12 @@ defmodule InfiniteTimes.InfDate do
       }),
       do: Date.compare(left, right)
 
-  def is?(:gte, left, right), do: compare(left, right) in [:eq, :gt]
-  def is?(:lte, left, right), do: compare(left, right) in [:eq, :lt]
-  def is?(op, left, right), do: compare(left, right) == op
+  @spec is?(:lt | :lte | :eq | :gte | :gt, t(), t()) :: boolean()
+  def is?(:gte, %__MODULE__{} = left, %__MODULE__{} = right),
+    do: compare(left, right) in [:eq, :gt]
+
+  def is?(:lte, %__MODULE__{} = left, %__MODULE__{} = right),
+    do: compare(left, right) in [:eq, :lt]
+
+  def is?(op, %__MODULE__{} = left, %__MODULE__{} = right), do: compare(left, right) == op
 end
