@@ -1,9 +1,12 @@
+Ecto.Adapters.SQL.Sandbox.mode(InfiniteTimes.Repo, :manual)
+
 ESpec.configure fn(config) ->
   config.before fn(tags) ->
-    {:shared, hello: :world, tags: tags}
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(InfiniteTimes.Repo)
+    {:shared, tags: tags}
   end
 
   config.finally fn(_shared) ->
-    :ok
+    :ok = Ecto.Adapters.SQL.Sandbox.checkin(InfiniteTimes.Repo, [])
   end
 end
