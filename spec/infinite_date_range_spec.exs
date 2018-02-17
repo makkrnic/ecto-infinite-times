@@ -31,6 +31,18 @@ defmodule InfiniteTimes.InfiniteDateRangeSpec do
         |> should(match_pattern %InfiniteDateRange{lower: lower, upper: %InfDate{finitness: :infinity}})
       end
     end
+
+    context "when provided `Date`'s" do
+      it "returns the range consisting of the provided params" do
+        lower = ~D[2018-01-05]
+        lower_inf = InfDate.new lower
+        upper = ~D[2018-02-05]
+        upper_inf = InfDate.new upper
+
+        InfiniteDateRange.new(lower, upper)
+        |> should(match_pattern %InfiniteDateRange{lower: lower_inf, upper: upper_inf})
+      end
+    end
   end
 
   describe "includes?/2" do
