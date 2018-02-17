@@ -1,5 +1,9 @@
 if Code.ensure_loaded?(Postgrex) do
   defmodule InfiniteTimes.PostgrexTypes.InfDate do
+    @moduledoc """
+    An extension that implements postgres' native support for positive and negative infinite dates
+    """
+
     import Postgrex.BinaryUtils, warn: false
     use Postgrex.BinaryExtension, send: "date_send"
 

@@ -1,4 +1,5 @@
 defmodule InfiniteTimes.InfiniteDate do
+  @moduledoc false
   use Ecto.Schema
 
   schema "infinite_dates" do
