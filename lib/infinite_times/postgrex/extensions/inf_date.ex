@@ -15,16 +15,27 @@ if Code.ensure_loaded?(Postgrex) do
     # @impl Postgrex.Extension
     def encode(_) do
       quote location: :keep do
-        {year, month, day} when year <= unquote(@max_year) ->
-          date = {year, month, day}
-          <<4::int32, :calendar.date_to_gregorian_days(date) - unquote(@gd_epoch)::int32>>
+        %InfiniteTimes.InfDate{} = date ->
+          unquote(__MODULE__).encode_inf_date(date)
 
-        :infinity ->
-          <<4::int32, unquote(@postgrex_date_infinity)::int32>>
-
-        :neg_infinity ->
-          <<4::int32, unquote(@postgrex_date_neg_infinity)::int32>>
+        other ->
+          raise ArgumentError, Postgrex.Utils.encode_msg(other, InfiniteTimes.InfDate)
       end
+    end
+
+    def encode_inf_date(%InfiniteTimes.InfDate{finitness: :infinity}),
+      do: <<4::int32, @postgrex_date_infinity::int32>>
+
+    def encode_inf_date(%InfiniteTimes.InfDate{finitness: :neg_infinity}),
+      do: <<4::int32, @postgrex_date_neg_infinity::int32>>
+
+    def encode_inf_date(%InfiniteTimes.InfDate{
+          date: %Date{year: year, month: month, day: day},
+          finitness: :finite
+        })
+        when year <= @max_year do
+      date = {year, month, day}
+      <<4::int32, :calendar.date_to_gregorian_days(date) - @gd_epoch::int32>>
     end
 
     # @impl Postgrex.Extension

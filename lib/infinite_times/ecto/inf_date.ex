@@ -42,16 +42,8 @@ defmodule InfiniteTimes.Ecto.InfDate do
   def load(_), do: :error
 
   @impl Ecto.Type
-  def dump(%InfiniteTimes.InfDate{finitness: finitness})
-      when finitness in [:infinity, :neg_infinity] do
-    {:ok, finitness}
-  end
-
-  def dump(%InfiniteTimes.InfDate{
-        date: %Date{year: year, month: month, day: day},
-        finitness: :finite
-      }) do
-    {:ok, {year, month, day}}
+  def dump(%InfiniteTimes.InfDate{} = date) do
+    {:ok, date}
   end
 
   def dump(_), do: :error

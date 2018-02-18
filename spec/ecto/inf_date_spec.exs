@@ -110,30 +110,30 @@ defmodule InfiniteTimes.Ecto.InfDateSpec do
   describe "dump/1" do
     context "with infinite date" do
       context ":infinity" do
-        it "returns the finitness" do
+        it "returns the InfDate" do
           :infinity
           |> InfiniteTimes.InfDate.new()
           |> InfDate.dump()
-          |> should(match_pattern {:ok, :infinity})
+          |> should(match_pattern {:ok, %InfiniteTimes.InfDate{finitness: :infinity}})
         end
       end
 
       context ":neg_infinity" do
-        it "returns the finitness" do
+        it "returns the InfDate" do
           :neg_infinity
           |> InfiniteTimes.InfDate.new()
           |> InfDate.dump()
-          |> should(match_pattern {:ok, :neg_infinity})
+          |> should(match_pattern {:ok, %InfiniteTimes.InfDate{finitness: :neg_infinity}})
         end
       end
     end
 
     context "with finite date" do
-      it "returns the date triplet" do
+      it "returns the InfDate" do
         %Date{year: 2009, month: 6, day: 10}
         |> InfiniteTimes.InfDate.new()
         |> InfDate.dump()
-        |> should(match_pattern {:ok, {2009, 6, 10}})
+        |> should(match_pattern {:ok, %InfiniteTimes.InfDate{finitness: :finite}})
       end
     end
 
