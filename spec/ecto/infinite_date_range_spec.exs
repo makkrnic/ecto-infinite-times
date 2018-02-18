@@ -99,7 +99,7 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRangeSpec do
         |> Enum.each(fn (range) ->
           range
           |> InfiniteDateRange.dump()
-          |> should(match_pattern {:ok, {_, _}})
+          |> should(match_pattern {:ok, %InfiniteTimes.InfiniteDateRange{}})
         end)
       end
     end

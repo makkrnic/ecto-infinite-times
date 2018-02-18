@@ -1,4 +1,4 @@
-defmodule InfiniteTimes.InfiniteDateSpec do
+defmodule InfiniteTimes.Postgrex.InfiniteDateSpec do
   use ESpec
   alias InfiniteTimes.InfiniteDate
   alias InfiniteTimes.Repo
