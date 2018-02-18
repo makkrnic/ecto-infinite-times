@@ -16,6 +16,9 @@ defmodule InfiniteTimes.InfiniteDateRange do
   def new(%Date{} = lower, upper), do: new(InfDate.new(lower), upper)
   def new(lower, %Date{} = upper), do: new(lower, InfDate.new(upper))
 
+  def new({_, _, _} = lower, upper), do: new(InfDate.new(lower), upper)
+  def new(lower, {_, _, _} = upper), do: new(lower, InfDate.new(upper))
+
   def new(%InfDate{} = lower, %InfDate{} = upper) do
     %__MODULE__{lower: lower, upper: upper}
   end
