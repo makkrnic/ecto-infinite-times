@@ -26,6 +26,15 @@ defmodule InfiniteTimes.InfDateSpec do
         |> should(match_pattern %InfDate{date: %Date{}, finitness: :finite})
       end
     end
+
+    context "when provided with valid date triplet" do
+      it "returns finite date" do
+        Date.utc_today()
+        |> Date.to_erl()
+        |> InfDate.new()
+        |> should(match_pattern %InfDate{date: %Date{}, finitness: :finite})
+      end
+    end
   end
 
   describe "from_erl/1" do
