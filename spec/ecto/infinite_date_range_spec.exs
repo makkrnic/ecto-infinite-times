@@ -54,17 +54,17 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRangeSpec do
 
   describe "load/1" do
     let :valid_tuples, do: [
-      {~D[2018-01-05], ~D[2018-02-05]},
-      {~D[2018-01-05], :infinity},
-      {:neg_infinity, ~D[2018-02-05]},
-      {:neg_infinity, :infinity},
+      %Postgrex.Range{lower: ~D[2018-01-05], upper: ~D[2018-02-05]},
+      %Postgrex.Range{lower: ~D[2018-01-05], upper: :infinity},
+      %Postgrex.Range{lower: :neg_infinity,  upper: ~D[2018-02-05]},
+      %Postgrex.Range{lower: :neg_infinity,  upper: :infinity},
     ]
 
     context "with valid tuples" do
       it "returns the InfiniteDateRange" do
         valid_tuples()
-        |> Enum.each(fn (tuple) ->
-          tuple
+        |> Enum.each(fn (range) ->
+          range
           |> InfiniteDateRange.load()
           |> should(match_pattern {:ok, %InfiniteTimes.InfiniteDateRange{}})
         end)
@@ -89,7 +89,7 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRangeSpec do
         {nil, nil},
       ]
 
-      it "returns {:ok, {lower, upper}}" do
+      it "returns {:ok, %Postgrex.Range}" do
         valid_tuples()
         |> Enum.map(fn (tuple) ->
           {:ok, range} = tuple
@@ -99,7 +99,7 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRangeSpec do
         |> Enum.each(fn (range) ->
           range
           |> InfiniteDateRange.dump()
-          |> should(match_pattern {:ok, %InfiniteTimes.InfiniteDateRange{}})
+          |> should(match_pattern {:ok, %Postgrex.Range{}})
         end)
       end
     end

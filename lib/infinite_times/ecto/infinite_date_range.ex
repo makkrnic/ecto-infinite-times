@@ -19,11 +19,9 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRange do
 
   def cast(_), do: :error
 
-  # TODO: see if possible to use Postgrex.Range as a backing type
   @impl Ecto.Type
-  @spec load({%Date{} | :infinity | :neg_infinity, %Date{} | :infinity | :neg_infinity}) ::
-          %InfiniteTimes.InfiniteDateRange{}
-  def load({lower, upper}) do
+  @spec load(%Postgrex.Range{}) :: %InfiniteTimes.InfiniteDateRange{}
+  def load(%Postgrex.Range{lower: lower, upper: upper}) do
     lower = lower |> InfiniteTimes.InfDate.new()
     upper = upper |> InfiniteTimes.InfDate.new()
     {:ok, InfiniteTimes.InfiniteDateRange.new(lower, upper)}
@@ -39,7 +37,7 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRange do
       }) do
     with {:ok, lower} <- InfiniteTimes.Ecto.InfDate.dump(lower),
          {:ok, upper} <- InfiniteTimes.Ecto.InfDate.dump(upper) do
-      {:ok, %InfiniteTimes.InfiniteDateRange{lower: lower, upper: upper}}
+      {:ok, %Postgrex.Range{lower: lower, upper: upper}}
     else
       _ -> :error
     end
