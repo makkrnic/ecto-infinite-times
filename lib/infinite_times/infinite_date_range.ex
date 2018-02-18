@@ -20,8 +20,13 @@ defmodule InfiniteTimes.InfiniteDateRange do
     %__MODULE__{lower: lower, upper: upper}
   end
 
+  def new(_, _), do: :error
+
+  def new(_), do: :error
+
   @spec includes?(t(), %InfDate{} | %Date{}) :: boolean()
   def includes?(%__MODULE__{} = range, %Date{} = date), do: includes?(range, InfDate.new(date))
+
   def includes?(%__MODULE__{} = range, %InfDate{} = date) do
     InfDate.is?(:gte, date, range.lower) && InfDate.is?(:lt, date, range.upper)
   end

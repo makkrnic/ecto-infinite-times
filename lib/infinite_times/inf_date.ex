@@ -13,7 +13,7 @@ defmodule InfiniteTimes.InfDate do
   def new(:infinity), do: %__MODULE__{date: nil, finitness: :infinity}
   def new(:neg_infinity), do: %__MODULE__{date: nil, finitness: :neg_infinity}
   def new(%Date{} = date), do: %__MODULE__{date: date, finitness: :finite}
-  def new({_, _, _} = date), do: date |> Date.from_erl! |> new()
+  def new({_, _, _} = date), do: date |> Date.from_erl!() |> new()
 
   def from_erl(erl_date) do
     case erl_date |> Date.from_erl() do
