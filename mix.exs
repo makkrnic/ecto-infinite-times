@@ -13,23 +13,29 @@ defmodule InfiniteTimes.MixProject do
       test_coverage: [tool: Coverex.Task],
       description: description(),
       package: package(),
+      elixirc_paths: elixirc_paths(Mix.env())
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      applications: [:logger, :ecto, :postgrex],
-      #mod: {InfiniteTimes, []}
+      applications: [:logger, :ecto, :postgrex]
     ]
   end
+
+  defp elixirc_paths(:test) do
+    ["lib", "spec/support"]
+  end
+
+  defp elixirc_paths(_), do: ["lib"]
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
       {:ecto, "~> 2.1"},
       {:postgrex, ">= 0.0.0"},
-      {:credo, "~> 0.9.0-rc6", only: [:dev, :test], runtime: false},
+      {:credo, "~> 0.9.0-rc6", only: :dev, runtime: false},
 
       # Tests
       {:espec, "~> 1.5.0", only: :test},
@@ -51,7 +57,7 @@ defmodule InfiniteTimes.MixProject do
       files: ["lib", "mix.exs", "README.md", "LICENSE*"],
       maintainers: ["Mak Krnic"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/makkrnic/ecto-infinite-times"},
+      links: %{"GitHub" => "https://github.com/makkrnic/ecto-infinite-times"}
     ]
   end
 end
