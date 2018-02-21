@@ -15,7 +15,8 @@ defmodule InfiniteTimes.MixProject do
       test_coverage: [tool: Coverex.Task],
       description: description(),
       package: package(),
-      elixirc_paths: elixirc_paths(Mix.env())
+      elixirc_paths: elixirc_paths(Mix.env()),
+      docs: docs()
     ]
   end
 
@@ -60,6 +61,14 @@ defmodule InfiniteTimes.MixProject do
       maintainers: ["Mak Krnic"],
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/makkrnic/ecto-infinite-times"}
+    ]
+  end
+
+  defp docs do
+    [
+      main: "InfiniteTimes",
+      canonical: "https://hexdocs.pm/infinite_times",
+      source_url: "https://github.com/makkrnic/ecto-infinite-times"
     ]
   end
 end
