@@ -1,10 +1,12 @@
 defmodule InfiniteTimes.MixProject do
   use Mix.Project
 
+  @version "0.1.0"
+
   def project do
     [
       app: :infinite_times,
-      version: "0.0.2-dev",
+      version: @version,
       elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
