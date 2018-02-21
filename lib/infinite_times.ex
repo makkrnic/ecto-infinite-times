@@ -1,3 +1,5 @@
 defmodule InfiniteTimes do
-  @moduledoc false
+  @moduledoc """
+  Ecto and postgrex support for infinite dates and times.
+  """
 end
