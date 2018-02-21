@@ -28,7 +28,7 @@ defmodule InfiniteTimes.MixProject do
   defp deps do
     [
       {:ecto, "~> 2.1"},
-      {:postgrex, "~> 0.13"},
+      {:postgrex, ">= 0.0.0"},
       {:credo, "~> 0.9.0-rc6", only: [:dev, :test], runtime: false},
 
       # Tests
