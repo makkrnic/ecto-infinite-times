@@ -1,3 +1,5 @@
+{:ok, _} = InfiniteTimes.Repo.start_link()
+
 Ecto.Adapters.SQL.Sandbox.mode(InfiniteTimes.Repo, :manual)
 
 ESpec.configure fn(config) ->
