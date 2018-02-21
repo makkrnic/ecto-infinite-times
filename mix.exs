@@ -4,7 +4,7 @@ defmodule InfiniteTimes.MixProject do
   def project do
     [
       app: :infinite_times,
-      version: "0.0.1",
+      version: "0.0.2-dev",
       elixir: "~> 1.4",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
