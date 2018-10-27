@@ -56,8 +56,11 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRangeSpec do
     let :valid_tuples, do: [
       %Postgrex.Range{lower: ~D[2018-01-05], upper: ~D[2018-02-05]},
       %Postgrex.Range{lower: ~D[2018-01-05], upper: :infinity},
+      %Postgrex.Range{lower: ~D[2018-01-05], upper: nil},
       %Postgrex.Range{lower: :neg_infinity,  upper: ~D[2018-02-05]},
+      %Postgrex.Range{lower: :nil,  upper: ~D[2018-02-05]},
       %Postgrex.Range{lower: :neg_infinity,  upper: :infinity},
+      %Postgrex.Range{lower: nil,  upper: nil},
     ]
 
     context "with valid tuples" do
