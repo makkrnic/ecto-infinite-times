@@ -36,7 +36,7 @@ defmodule InfiniteTimes.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ecto, "~> 2.1"},
+      {:ecto, "~> 2.1 or ~> 3.0"},
       {:postgrex, ">= 0.0.0"},
       {:credo, "~> 0.9.0-rc6", only: :dev, runtime: false},
 
@@ -45,7 +45,7 @@ defmodule InfiniteTimes.MixProject do
       {:coverex, "~> 1.4.10", only: :test},
 
       # Docs
-      {:ex_doc, "~> 0.16", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false}
     ]
   end
 
