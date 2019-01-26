@@ -15,7 +15,7 @@ defmodule InfiniteTimes.Ecto.InfDate do
   def cast(%Date{} = d), do: {:ok, d |> InfiniteTimes.InfDate.new()}
 
   def cast(d) when is_binary(d) do
-    with {:ok, date} <- Ecto.Date.cast(d),
+    with {:ok, date} <- Date.from_iso8601(d),
          {:ok, date} <- Date.new(date.year, date.month, date.day) do
       {:ok, date |> InfiniteTimes.InfDate.new()}
     else

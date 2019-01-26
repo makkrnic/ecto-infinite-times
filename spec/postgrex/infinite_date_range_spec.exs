@@ -15,7 +15,7 @@ defmodule InfiniteTimes.Postgrex.InfiniteDateRangeSpec do
       InfiniteDateRange
       |> Repo.get(new_id)
       |> Map.get(:the_range)
-      |> should(match_pattern expected_range)
+      |> should(match_pattern ^expected_range)
     end
 
     it "loads upper unbounded range correctly" do
@@ -28,8 +28,8 @@ defmodule InfiniteTimes.Postgrex.InfiniteDateRangeSpec do
 
       InfiniteDateRange
       |> Repo.get(new_id)
-      |> Map.get(:the_date)
-      |> should(match_pattern expected_range)
+      |> Map.get(:the_range)
+      |> should(match_pattern ^expected_range)
     end
 
     it "loads lower unbounded range correctly" do
@@ -42,17 +42,17 @@ defmodule InfiniteTimes.Postgrex.InfiniteDateRangeSpec do
 
       InfiniteDateRange
       |> Repo.get(new_id)
-      |> Map.get(:the_date)
-      |> should(match_pattern expected_range)
+      |> Map.get(:the_range)
+      |> should(match_pattern ^expected_range)
     end
   end
 
   describe "saving to db" do
     it "saves normal bounded range correctly" do
-      expected_range = InfiniteTimes.InfiniteDateRange.new(~D[2018-01-02], ~D[2018-02-02])
+      expected_range = InfiniteTimes.InfiniteDateRange.new(~D[2018-01-02], ~D[2018-02-03])
 
       ret = %InfiniteDateRange{}
-      |> Ecto.Changeset.cast(%{the_range: {~D[2018-01-02], ~D[2018-02-02]}}, [:the_range])
+      |> Ecto.Changeset.cast(%{the_range: {~D[2018-01-02], ~D[2018-02-03]}}, [:the_range])
       |> Repo.insert
 
       ret
@@ -63,11 +63,11 @@ defmodule InfiniteTimes.Postgrex.InfiniteDateRangeSpec do
       InfiniteDateRange
       |> Repo.get(d.id)
       |> Map.get(:the_range)
-      |> should(match_pattern expected_range)
+      |> should(match_pattern ^expected_range)
     end
 
     it "saves the upper unbounded range correctly" do
-      expected_range = InfiniteTimes.InfiniteDateRange.new(~D[2018-01-02], :infinity)
+      expected_range = InfiniteTimes.InfiniteDateRange.new(~D[2018-01-02], nil)
 
       ret = %InfiniteDateRange{}
       |> Ecto.Changeset.cast(%{the_range: {~D[2018-01-02], nil}}, [:the_range])
@@ -81,11 +81,11 @@ defmodule InfiniteTimes.Postgrex.InfiniteDateRangeSpec do
       InfiniteDateRange
       |> Repo.get(d.id)
       |> Map.get(:the_range)
-      |> should(match_pattern expected_range)
+      |> should(match_pattern ^expected_range)
     end
 
     it "saves the lower unbounded range correctly" do
-      expected_range = InfiniteTimes.InfiniteDateRange.new(:infinity, ~D[2018-01-02])
+      expected_range = InfiniteTimes.InfiniteDateRange.new(nil, ~D[2018-01-02])
 
       ret = %InfiniteDateRange{}
       |> Ecto.Changeset.cast(%{the_range: {nil, ~D[2018-01-02]}}, [:the_range])
@@ -99,7 +99,7 @@ defmodule InfiniteTimes.Postgrex.InfiniteDateRangeSpec do
       InfiniteDateRange
       |> Repo.get(d.id)
       |> Map.get(:the_range)
-      |> should(match_pattern expected_range)
+      |> should(match_pattern ^expected_range)
     end
   end
 end

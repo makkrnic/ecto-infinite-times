@@ -37,7 +37,7 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRange do
       }) do
     with {:ok, lower} <- InfiniteTimes.Ecto.InfDate.dump(lower),
          {:ok, upper} <- InfiniteTimes.Ecto.InfDate.dump(upper) do
-      {:ok, %Postgrex.Range{lower: lower, upper: upper}}
+      {:ok, %Postgrex.Range{lower: lower, upper: upper, upper_inclusive: false}}
     else
       _ -> :error
     end

@@ -10,7 +10,7 @@ defmodule InfiniteTimes.InfiniteDateRangeSpec do
         upper = InfDate.new ~D[2018-02-05]
 
         InfiniteDateRange.new(lower, upper)
-        |> should(match_pattern %InfiniteDateRange{lower: lower, upper: upper})
+        |> should(match_pattern %InfiniteDateRange{lower: ^lower, upper: ^upper})
       end
     end
 
@@ -19,7 +19,7 @@ defmodule InfiniteTimes.InfiniteDateRangeSpec do
         upper = InfDate.new ~D[2018-01-05]
 
         InfiniteDateRange.new(nil, upper)
-        |> should(match_pattern %InfiniteDateRange{lower: %InfDate{finitness: :neg_infinity}, upper: upper})
+        |> should(match_pattern %InfiniteDateRange{lower: %InfDate{finitness: :neg_infinity}, upper: ^upper})
       end
     end
 
@@ -28,7 +28,7 @@ defmodule InfiniteTimes.InfiniteDateRangeSpec do
         lower = InfDate.new ~D[2018-01-05]
 
         InfiniteDateRange.new(lower, nil)
-        |> should(match_pattern %InfiniteDateRange{lower: lower, upper: %InfDate{finitness: :infinity}})
+        |> should(match_pattern %InfiniteDateRange{lower: ^lower, upper: %InfDate{finitness: :infinity}})
       end
     end
 
@@ -40,7 +40,7 @@ defmodule InfiniteTimes.InfiniteDateRangeSpec do
         upper_inf = InfDate.new upper
 
         InfiniteDateRange.new(lower, upper)
-        |> should(match_pattern %InfiniteDateRange{lower: lower_inf, upper: upper_inf})
+        |> should(match_pattern %InfiniteDateRange{lower: ^lower_inf, upper: ^upper_inf})
       end
     end
 
@@ -52,7 +52,7 @@ defmodule InfiniteTimes.InfiniteDateRangeSpec do
         upper_inf = InfDate.new upper
 
         InfiniteDateRange.new(lower, upper)
-        |> should(match_pattern %InfiniteDateRange{lower: lower_inf, upper: upper_inf})
+        |> should(match_pattern %InfiniteDateRange{lower: ^lower_inf, upper: ^upper_inf})
       end
     end
   end
