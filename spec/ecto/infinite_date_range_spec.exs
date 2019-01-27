@@ -9,7 +9,7 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRangeSpec do
         range = InfiniteTimes.InfiniteDateRange.new(InfDate.new(~D[2018-01-05]), InfDate.new(~D[2018-02-05]))
         range
         |> InfiniteDateRange.cast()
-        |> should(match_pattern {:ok, range})
+        |> should(match_pattern {:ok, ^range})
       end
     end
 

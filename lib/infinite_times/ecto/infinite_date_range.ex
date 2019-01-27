@@ -22,8 +22,8 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRange do
   @impl Ecto.Type
   @spec load(%Postgrex.Range{}) :: %InfiniteTimes.InfiniteDateRange{}
   def load(%Postgrex.Range{lower: lower, upper: upper}) do
-    lower = lower |> nil_or(:neg_infinity) |> InfiniteTimes.InfDate.new()
-    upper = upper |> nil_or(:infinity) |> InfiniteTimes.InfDate.new()
+    lower = lower |> unbound_nil_or(:neg_infinity) |> InfiniteTimes.InfDate.new()
+    upper = upper |> unbound_nil_or(:infinity) |> InfiniteTimes.InfDate.new()
     {:ok, InfiniteTimes.InfiniteDateRange.new(lower, upper)}
   end
 
@@ -37,7 +37,7 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRange do
       }) do
     with {:ok, lower} <- InfiniteTimes.Ecto.InfDate.dump(lower),
          {:ok, upper} <- InfiniteTimes.Ecto.InfDate.dump(upper) do
-      {:ok, %Postgrex.Range{lower: lower, upper: upper}}
+      {:ok, %Postgrex.Range{lower: lower, upper: upper, upper_inclusive: false}}
     else
       _ -> :error
     end
@@ -45,6 +45,7 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRange do
 
   def dump(_), do: :error
 
-  defp nil_or(nil, default), do: default
-  defp nil_or(v, _), do: v
+  defp unbound_nil_or(:unbound, default), do: default
+  defp unbound_nil_or(nil, default), do: default
+  defp unbound_nil_or(v, _), do: v
 end
