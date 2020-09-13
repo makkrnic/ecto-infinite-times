@@ -7,7 +7,7 @@ defmodule InfiniteTimes.MixProject do
     [
       app: :infinite_times,
       version: @version,
-      elixir: "~> 1.4",
+      elixir: "~> 1.10",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
       deps: deps(),
@@ -37,11 +37,11 @@ defmodule InfiniteTimes.MixProject do
   defp deps do
     [
       {:ecto_sql, "~> 3.0"},
-      {:postgrex, ">= 0.0.0"},
+      {:postgrex, ">= 0.15.0"},
       {:credo, "~> 0.9.0-rc6", only: :dev, runtime: false},
 
       # Tests
-      {:espec, "~> 1.5.0", only: :test},
+      {:espec, "~> 1.8.0", only: :test},
       {:coverex, "~> 1.4.10", only: :test},
 
       # Docs
