@@ -10,7 +10,7 @@ by adding `infinite_times` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:infinite_times, "~> 0.1.0"}
+    {:infinite_times, "~> 0.4"}
   ]
 end
 ```
