@@ -4,6 +4,6 @@ if Code.ensure_loaded?(Postgrex) do
     [
       InfiniteTimes.PostgrexTypes.InfDate
     ] ++ Ecto.Adapters.Postgres.extensions(),
-    json: Poison
+    json: Jason
   )
 end

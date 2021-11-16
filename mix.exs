@@ -1,7 +1,7 @@
 defmodule InfiniteTimes.MixProject do
   use Mix.Project
 
-  @version "0.4.0"
+  @version "0.4.1"
 
   def project do
     [
@@ -39,6 +39,7 @@ defmodule InfiniteTimes.MixProject do
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.15.0"},
       {:credo, "~> 0.9.0-rc6", only: :dev, runtime: false},
+      {:jason, "~> 1.0"},
 
       # Tests
       {:espec, "~> 1.8.0", only: :test},
