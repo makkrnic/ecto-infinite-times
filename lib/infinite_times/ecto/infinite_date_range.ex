@@ -48,4 +48,11 @@ defmodule InfiniteTimes.Ecto.InfiniteDateRange do
   defp unbound_nil_or(:unbound, default), do: default
   defp unbound_nil_or(nil, default), do: default
   defp unbound_nil_or(v, _), do: v
+
+  @impl true
+  def equal?(%{upper: left_upper, lower: left_lower}, %{upper: right_upper, lower: right_lower}) do
+    InfiniteTimes.Ecto.InfDate.equal?(left_lower, right_lower) && InfiniteTimes.Ecto.InfDate.equal?(left_upper, right_upper)
+  end
+
+  def equal?(_, _), do: false
 end

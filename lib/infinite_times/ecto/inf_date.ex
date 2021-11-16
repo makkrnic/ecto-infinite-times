@@ -47,4 +47,7 @@ defmodule InfiniteTimes.Ecto.InfDate do
   end
 
   def dump(_), do: :error
+
+  @impl true
+  def equal?(left, right), do: InfiniteTimes.InfDate.is?(:eq, left, right)
 end
