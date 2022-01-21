@@ -30,12 +30,11 @@ if Code.ensure_loaded?(Postgrex) do
       do: <<4::int32, @postgrex_date_neg_infinity::int32>>
 
     def encode_inf_date(%InfiniteTimes.InfDate{
-          date: %Date{year: year, month: month, day: day},
+          date: %Date{year: year, month: month, day: day} = date,
           finitness: :finite
         })
         when year <= @max_year do
-      date = {year, month, day}
-      <<4::int32, :calendar.date_to_gregorian_days(date) - @gd_epoch::int32>>
+      <<4::int32, Date.to_gregorian_days(date) - @gd_epoch::int32>>
     end
 
     # @impl Postgrex.Extension
@@ -55,10 +54,10 @@ if Code.ensure_loaded?(Postgrex) do
           :neg_infinity
 
         d when d + unquote(@gd_epoch) < 0 ->
-          :calendar.gregorian_days_to_date(0)
+          Date.from_gregorian_days(0)
 
         _ ->
-          :calendar.gregorian_days_to_date(days + unquote(@gd_epoch))
+          Date.from_gregorian_days(days + unquote(@gd_epoch))
       end
     end
   end

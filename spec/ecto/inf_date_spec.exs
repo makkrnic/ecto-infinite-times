@@ -84,7 +84,7 @@ defmodule InfiniteTimes.Ecto.InfDateSpec do
 
     context "with date triplet and :finite provided" do
       it "returns the InfDate" do
-        {{2000, 1, 2}, :finite}
+        {%Date{year: 2000, month: 1, day: 2}, :finite}
         |> InfDate.load()
         |> should(match_pattern {:ok, %InfiniteTimes.InfDate{}})
       end
@@ -92,7 +92,7 @@ defmodule InfiniteTimes.Ecto.InfDateSpec do
 
     context "with only date triplet provided" do
       it "returns the `:finite` InfDate" do
-        {2000, 1, 2}
+        %Date{year: 2000, month: 1, day: 2}
         |> InfDate.load()
         |> should(match_pattern {:ok, %InfiniteTimes.InfDate{finitness: :finite}})
       end

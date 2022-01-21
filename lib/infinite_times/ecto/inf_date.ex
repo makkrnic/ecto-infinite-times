@@ -30,13 +30,10 @@ defmodule InfiniteTimes.Ecto.InfDate do
     {:ok, InfiniteTimes.InfDate.new(finitness)}
   end
 
-  def load({_, _, _} = d), do: load({d, :finite})
+  def load(%Date{} = d), do: load({d, :finite})
 
-  def load({{year, month, day}, :finite}) do
-    case Date.new(year, month, day) do
-      {:ok, date} -> {:ok, date |> InfiniteTimes.InfDate.new()}
-      _ -> :error
-    end
+  def load({%Date{} = date, :finite}) do
+    {:ok, date |> InfiniteTimes.InfDate.new()}
   end
 
   def load(_), do: :error

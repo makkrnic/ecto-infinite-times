@@ -33,18 +33,24 @@ defmodule InfiniteTimes.InfDate do
   def compare(%__MODULE__{finitness: :neg_infinity}, _), do: :lt
   def compare(_, %__MODULE__{finitness: :neg_infinity}), do: :gt
 
-  def compare(%__MODULE__{date: left, finitness: :finite}, %__MODULE__{
+  def compare(
+      %__MODULE__{
+        date: left,
+        finitness: :finite
+      }, %__MODULE__{
         date: right,
         finitness: :finite
       }),
       do: Date.compare(left, right)
 
+  def compare(_, _), do: :neq
+
   @spec is?(:lt | :lte | :eq | :gte | :gt, t(), t()) :: boolean()
-  def is?(:gte, %__MODULE__{} = left, %__MODULE__{} = right),
+  def is?(:gte, left, right),
     do: compare(left, right) in [:eq, :gt]
 
-  def is?(:lte, %__MODULE__{} = left, %__MODULE__{} = right),
+  def is?(:lte, left, right),
     do: compare(left, right) in [:eq, :lt]
 
-  def is?(op, %__MODULE__{} = left, %__MODULE__{} = right), do: compare(left, right) == op
+  def is?(op, left, right), do: compare(left, right) == op
 end
