@@ -18,6 +18,9 @@ if Code.ensure_loaded?(Postgrex) do
         %InfiniteTimes.InfDate{} = date ->
           unquote(__MODULE__).encode_inf_date(date)
 
+        %Date{} = date ->
+          unquote(__MODULE__).encode_inf_date(%InfiniteTimes.InfDate{finitness: :finite, date: date})
+
         other ->
           raise ArgumentError, Postgrex.Utils.encode_msg(other, InfiniteTimes.InfDate)
       end
